@@ -19,6 +19,25 @@ const monsterStats = document.querySelector("#monsterStats")
 const monsterNameText = document.querySelector("#monsterNameText")
 const monsterHealthText = document.querySelector("#monsterHealthText")
 
+const weapons = [
+    {
+        name: "stick",
+        power: 5,
+    },
+    {
+        name: "dagger",
+        power: 30,
+    },
+    {
+        name: "claw hammer",
+        power: 50,
+    },
+    {
+        name: "sword",
+        power: 100,
+    }
+]
+
 const locations = [
     {
         name: "town square",
@@ -31,6 +50,12 @@ const locations = [
         "button text":["buy 10 health (10 gold)", "buy weapon (30 gold)", "go to town square"],
         "button functions":[buyHealth, buyWeapon, goTown],
         "text":"Welcome to the store! What would you like to buy?"
+    },
+    {
+        name: "cave",
+        "button text":["fight slime","fight fanged beast","go to town square"],
+        "button functions":[fightSlime, fightBeast, goTown],
+        "text": "you enter the cave , you see some monsters"
     }
 ]
 
@@ -50,7 +75,7 @@ function upadte(location){
     button1.onclick = locations["button functions"][0]
     button2.onclick = locations["button functions"][1]
     button3.onclick = locations["button functions"][2]
-    
+
     text.innerText = locations["text"]
 }
 
@@ -63,7 +88,7 @@ function goStore(){
 }
 
 function goCave(){
-    console.log("going to Cave")
+    update(loactions[2])
     
 }
 
@@ -73,12 +98,33 @@ function fightDragon(){
 }
 
 function buyHealth(){
-    console.log("buying health")
-    
+    if(gold >= 10){
+        gold -= 10
+        health += 10
+        goldText.innerText = gold
+        healthText.innerText = health
+    }
+    else{
+        text.innerText = "you don't have enough gold to buy health"
+    }
 }
 
 function buyWeapon(){
-    console.log("buying health")
-    
+    if(gold >= 30){
+        gold -= 30
+        currentWeapon += 1
+        goldText.innerText = gold
+        let newWeapon = weapons[currentWeapon].name
+        text.innerText = "you have a " + newWeapon
+        inventory.push(newWeapon)
+        
+    }
 }
 
+function fightSlime(){
+
+}
+
+function fightBeast(){
+
+}
